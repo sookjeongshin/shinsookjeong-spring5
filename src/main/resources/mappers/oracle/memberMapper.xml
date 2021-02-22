@@ -21,12 +21,12 @@ memberMapper.xml: 회원관리에대한 모든 쿼리를 모아서 관리하는 
 	<if test="search_type != '' and search_type !=null">
 		where
 		<if test="search_type == 'all'.toString()">
-				user_id like '%'||#{search_keyword}||'%')
+				user_id like '%'||#{search_keyword}||'%'
 				or
 				user_name like '%'||#{search_keyword}||'%'
 		</if>
 		<if test="search_type == 'user_id'.toString()">
-	 			user_id like '%'||#{search_keyword}||%'
+	 			user_id like '%'||#{search_keyword}||'%'
 	 	</if>
 	 	<if test="search_type == 'user_name'.toString()">
 	 			user_name like '%'||#{search_keyword}||'%'
@@ -38,19 +38,18 @@ select count(*) from tbl_member
 <include refid="sqlWhere"></include>
 </select>
 <select id="selectMember" resultType="org.edu.vo.MemberVO">
-
 SELECT TABLE_B.* FROM 
 (
     SELECT ROWNUM AS RNUM, TABLE_A.* FROM
     (
-    SELECT * FROM TBL_MEMBER
+    SELECT * FROM TBL_MEMBER 
     <include refid="sqlWhere"></include>
-<![CDATA[
     order by reg_date desc
     ) TABLE_A
+<![CDATA[
     WHERE ROWNUM <= (#{queryStartNo}/#{queryPerPageNum}+1)*#{queryPerPageNum}
 ) TABLE_B
-WHERE TABLE_B.RNUM > (#{queryStartNo}/#{queryPerPageNum})* #{queryPerPageNum}
+WHERE TABLE_B.RNUM > (#{queryStartNo}/#{queryPerPageNum}) * #{queryPerPageNum}
 ]]>
 </select>
 
@@ -99,8 +98,13 @@ DELETE FROM tbl_member WHERE user_id=#{user_id}
 
 <select id="readMember" resultType="org.edu.vo.MemberVO">
 SELECT * FROM tbl_member WHERE user_id=#{user_id}
-
-
 </select>
 
+<select id="testJob" resultType="org.edu.vo.MemberVO">
+<![CDATA[
+SELECT * FROM 
+TBL_MEMBER 
+WHERE UPDATE_DATE < ADD_MONTHS(SYSDATE,-6)
+]]>
+</select>
 </mapper>

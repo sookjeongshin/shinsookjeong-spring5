@@ -25,4 +25,6 @@ public interface IF_MemberDAO {
 	public MemberVO readMember(String user_id) throws Exception;
 
 	public void updateMember(MemberVO memberVO) throws Exception;
+
+	public List<MemberVO> testJob() throws Exception;
 }

@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<link rel="stylesheet" href="/resources/home/css/reset.css">
+<link rel="stylesheet" href="/resources/home/css/reset.css"><!-- 상대경로 절대경로로 변경 /로시작 -->
 <link rel="stylesheet" href="/resources/home/css/main.css">
 <link rel="stylesheet" href="/resources/home/css/tablet.css">
 <link rel="stylesheet" href="/resources/home/css/pc.css">
@@ -21,13 +21,11 @@
 <script src="/resources/home/js/rollmain.js"></script>
 <!-- //슬라이드용 --> 
 <style>
-
 </style>
 <script>
-if('${msg}' !='') {//자바의 EL표기법 =달라{변수명}
-	alert("${msg} 가(이)성공하였습니다.");
+if('${msg}' != '') {//자바의 EL표기법 = 달라{변수명}
+	alert("${msg} 가(이) 성공하였습니다.");
 }
-
 </script>
 </head>
 <body>
@@ -45,23 +43,23 @@ if('${msg}' !='') {//자바의 EL표기법 =달라{변수명}
 			<p class="openMOgnb"><a href="#"><b class="hdd">메뉴열기</b> <span></span><span></span><span></span></a></p>
 			<div class="header_cont">
 				<ul class="util clear">
-					<c:choose>
+				<c:choose>
 					<c:when test="${session_enabled eq 'true'}">
-					<!-- 로그인 후 보이는 메뉴(아래) -->
-					<li><a href="#">${session_username}님 환영합니다.</a></li>
-					<c:if test="${session_type eq 'normal'}">
-					<li><a href="/member/mypage">마이페이지</a></li>
-					</c:if>
-					<li><a href="/logout">로그아웃</a></li>
-					<c:if test="${session_levels eq'ROLE_ADMIN'}">
-					<li><a href="/admin">AdminLTE</a></li>
-					</c:if>
+						<!-- 로그인 후 보이는 메뉴(아래) -->
+						<li><a href="#">${session_username} 님 환영합니다.</a></li>
+						<c:if test="${session_type eq 'normal'}">
+							<li><a href="/member/mypage">마이페이지</a></li>
+						</c:if>
+						<li><a href="/logout">로그아웃</a>
+						<c:if test="${session_levels eq 'ROLE_ADMIN'}">
+							<li><a href="/admin">AdminLTE</a></li>
+						</c:if>
 					</c:when>
 					<c:otherwise>
-					<li><a href="/login">로그인</a></li>
-					<li><a href="/join">회원가입</a></li>
+						<li><a href="/login">로그인</a></li>
+						<li><a href="/join">회원가입</a></li>
 					</c:otherwise>
-					</c:choose>
+				</c:choose>
 				</ul>	
 				<nav>
 				<ul class="gnb clear">
@@ -73,7 +71,7 @@ if('${msg}' !='') {//자바의 EL표기법 =달라{변수명}
                             </ul>
                         </div>
 					</li>
-		<!-- 자바jstl로 board_type_list의 1번째 레코드값에서 board_type변수생성(아래) -->
+					<!-- 자바jstl로 board_type_list의 1번째 레코드값에서 board_type변수생성(아래) -->
 					<c:forEach items="${board_type_list}" var="boardTypeVO" varStatus="status">
 						<c:if test="${status.index == 0}">
 						<c:set var="first_board_type" value="${boardTypeVO.board_type}" />
@@ -88,7 +86,6 @@ if('${msg}' !='') {//자바의 EL표기법 =달라{변수명}
                             </ul>
                         </div>
 					</li>
-					
 				</ul>
                 </nav>
 				<p class="closePop"><a href="javascript:;">닫기</a></p>
@@ -97,4 +94,3 @@ if('${msg}' !='') {//자바의 EL표기법 =달라{변수명}
 		</div>
 	</header>
 	<!-- //헤더상단메뉴영역영역 -->
-	

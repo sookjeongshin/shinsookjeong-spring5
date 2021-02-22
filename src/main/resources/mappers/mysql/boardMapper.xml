@@ -40,9 +40,9 @@ delete from tbl_attach where bno = #{bno}
 <insert id="insertAttach">
 insert into tbl_attach (save_file_name, real_file_name, bno) 
 values (#{save_file_name}, #{real_file_name}, (select bno from tbl_board order by bno desc limit 1) )
-</insert>-->
+</insert>
+-->
 <!-- Hsql용 헤로쿠용 limit 사용X -->
-
 <insert id="insertAttach">
 insert into tbl_attach (save_file_name, real_file_name, bno) 
 values (#{save_file_name}, #{real_file_name}, (select top 1 bno from tbl_board order by bno desc) )
