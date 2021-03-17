@@ -50,7 +50,7 @@
                   </div>
                   <div class="form-group">
                   <label for="user_name">user_name</label>
-                  <input type="text" class="form-control" name="user_name" id="user_name"  placeholder="암호를 입력해주세요" required>
+                  <input type="text" class="form-control" name="user_name" id="user_name"  placeholder="이름을 입력해주세요" required>
                   </div>
                   <div class="form group">
                   <label for="email">email</label>

@@ -475,8 +475,28 @@ public class AdminController {
 	
 	//bind:묶는다는 의미, /admin 요청URL경로와 admin/home.jsp를 묶는다는 의미.
 	@RequestMapping(value="/admin",method=RequestMethod.GET)
-	public String admin() throws Exception {
+	public String admin(Model model) throws Exception {
+		//대시보드 만들기 1번 방밥: ModelMap<Key:object>값을 만들어서
+		PageVO pageVO = new PageVO();
+		pageVO.setPage(1);
+		pageVO.setPerPageNum(5);
+		pageVO.setQueryPerPageNum(4);
+		List<MemberVO> latest_member = memberService.selectMember(pageVO);
+		model.addAttribute("latest_member", latest_member);
 		return "admin/home";//상대경로 파일위치
 	}
+		@RequestMapping(value="/admin/latest/latest_board",method=RequestMethod.GET)
+		public String latest_board(@RequestParam("board_type") String board_type, Model model) throws Exception {
+			PageVO pageVO = new PageVO();
+			pageVO.setBoard_type(board_type); //jsp
+			pageVO.setPage(1);
+			pageVO.setPerPageNum(5);
+			pageVO.setQueryPerPageNum(5);
+			List<BoardVO> latest_list = boardService.selectBoard(pageVO);
+			model.addAttribute("latest_list", latest_list);
+			
+
+			return"admin/latest/latest_board";
+		}
+	}
 	
-}
